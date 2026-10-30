@@ -1,0 +1,42 @@
+{
+  "name": "g2-topup",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Open-source digital game top-up & gift card store (Vite + React + Cloudflare Workers + D1)",
+  "scripts": {
+    "dev": "vite --config web/vite.config.ts",
+    "dev:worker": "wrangler dev",
+    "build": "vite build --config web/vite.config.ts",
+    "preview": "wrangler dev",
+    "deploy": "npm run build && wrangler deploy",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p web/tsconfig.json --noEmit",
+    "db:migrate:local": "wrangler d1 migrations apply g2topup-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply g2topup-db --remote",
+    "db:seed:catalog": "node scripts/sync-catalog.mjs",
+    "test": "node scripts/e2e.mjs",
+    "test:browser": "node scripts/browser-e2e.mjs",
+    "test:all": "node scripts/e2e.mjs && node scripts/browser-e2e.mjs"
+  },
+  "dependencies": {
+    "hono": "^4.9.7",
+    "lucide-react": "^0.544.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.9.1",
+    "sonner": "^2.0.7"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250917.0",
+    "@tailwindcss/vite": "^4.1.13",
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.2",
+    "puppeteer-core": "^25.16.0",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.5",
+    "wrangler": "^4.38.0"
+  }
+}
